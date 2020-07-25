@@ -10,17 +10,17 @@ O server atualiza a frase embaixo
 
 
 ## Next Step:
-Pay Technical Debt
+Create
 
 ## TODO
 
-- [ ] Sequelize
+- [x] Sequelize
 
-- [ ] Routes 
+- [ ] Routes
 
-- [ ] Create
+- [x] Create
 
-- [ ] Read
+- [x] Read
 
 - [ ] Update
 
@@ -33,9 +33,11 @@ Pay Technical Debt
 
 ## Test
 
-https://expressjs.com/pt-br/guide/routing.html - app.route()
+https://github.com/sequelize/express-example/tree/master/express-main-example
 
-Quote com Quote, Author and Place
+https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs
+
+https://expressjs.com/pt-br/guide/routing.html - app.route()
 
 https://stackoverflow.com/questions/55310227/cant-figure-out-how-to-import-modules-in-browser-with-javascript
 

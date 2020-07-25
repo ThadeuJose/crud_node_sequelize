@@ -11,15 +11,14 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 const PORT = 3000;
 
-app.set('views','./views');
+app.set('views','./views'); // TODO: Ver se é mesmo necessário
 
 app.use(express.static(__dirname + '/public'));
 
 let homeUrl = '/';
 
-app.get('/allQuote',function (req, res) {
+app.get('/quote',function (req, res) {
   db.readAllQuotes().then((data) => {
-      console.log(data);
       res.json(data);
   });
 })
@@ -39,14 +38,13 @@ app.delete('/quote/:id',function (req, res) {
 })
 
 app.post('/quote', function (req, res) {
-  let quote = req.body.quote;
-  if(quote){
-    db.insertQuote(quote);
+  let data = req.body;
+  if(data){
+    db.insertQuote(data);
     res.send('OK');
   }else{
     res.send('not OK');
   }
-  console.log('POST');
 });
 
 app.put('/quote', function (req, res) {

@@ -1,15 +1,22 @@
-const sqlite3 = require('sqlite3').verbose();
+let Sequelize = require('sequelize');
 
-function connect(){
-	return new sqlite3.Database('./database/production.db',  (err) => {
-		if (err) {
-			console.error(err.message);
-		}
-		console.log('Connected to the database.');
-	});
+const sequelize = new Sequelize({
+  dialect: 'sqlite',
+  storage: './database/production.db'
+});
 
+var Quote = require('./quote.js')(sequelize);
+
+exports.connect = async function connect(){
+	try {
+	  await sequelize.authenticate();
+	  console.log('Connection has been established successfully.');
+	} catch (error) {
+	  console.error('Unable to connect to the database:', error);
+	}
 }
 
+// TODO: Tirar no final
 function disconnect(db) {
 	db.close((err) => {
 		if (err) {
@@ -19,42 +26,22 @@ function disconnect(db) {
 	});
 }
 
-exports.setUpTable = function() {
-	const create_query = 'CREATE TABLE IF NOT EXISTS quote (id INTEGER PRIMARY KEY AUTOINCREMENT, quote TEXT NOT NULL)';
-	let db = connect();
-	db.run(create_query);
-	db.close();
+exports.setUpTable = async function() {
+	await sequelize.sync({ alter: true })
 };
 
-exports.insertQuote = function(quote) {
-	let db = connect();
-	const insert_query = 'INSERT INTO quote (quote) VALUES(?)';
-	db.run(insert_query, [ quote ], function(err) {
-	 if (err) {
-		 console.log(err.message);
-	 }
-	 console.log(`A row has been inserted with row id ${this.lastID}`);
- });
- disconnect(db);
+exports.insertQuote = async function(data) {
+		let response = await Quote.create(data);
+		console.log('Insert with id: ' + response.id);
+		return response;
 };
 
-exports.readAllQuotes = function() {
-	let db = connect();
-	return new Promise(function(resolve, reject) {
-		const read_query = 'SELECT * FROM quote ORDER BY id';
-		db.all(read_query, [], (err, rows) => {
-			if (err) {
-				console.log(err.message);
-				reject(err);
-			}
-			let resp = [];
-		  rows.forEach((row) => {
-		    resp.push(row);
-		  });
-			resolve(resp);
-			disconnect(db);
-		});
-	});
+exports.readAllQuotes = async function() {
+	let response = await Quote.findAll();
+	response = response.map((e) => {
+		return e.dataValues;
+	})
+	return response;
 };
 
 exports.readQuote = function(id) {

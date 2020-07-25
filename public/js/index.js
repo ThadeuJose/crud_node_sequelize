@@ -3,10 +3,12 @@ $(function () {
 
   $('#submit').click(function () {
       console.log('OK');
-      let value = $('#quote').val();
-      if (value) {
+      let quote = $('#quote').val();
+      let author = $('#author').val();
+      let place = $('#place').val();
+      if (quote) {
         console.log('Send');
-        $.post('/quote',{ quote:value },function (data) {
+        $.post('/quote',{ quote:quote, author:author, place:place }, function (data) {
           pollQuotes();
         });
       }
@@ -14,7 +16,7 @@ $(function () {
   });
 
   function pollQuotes(){
-    $.get( "/allquote", function(data) {
+    $.get( "/quote", function(data) {
         console.log(data);
         $('#quotes').empty();
         for (var i of data) {
@@ -23,7 +25,7 @@ $(function () {
           let btnEdit = $('<button>').text('Edit').click(editQuote);
 
           $('<div>')
-              .text(i.quote)
+              .text(i.quote)// TODO: Ajeitar 
               .attr('id',i.id)
               .append(btnDelete)
               .append(btnEdit)
