@@ -33,6 +33,10 @@ Create
 
 ## Test
 
+https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/skeleton_website
+
+https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes
+
 https://github.com/sequelize/express-example/tree/master/express-main-example
 
 https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs
@@ -62,3 +66,5 @@ https://github.com/axios/axios
 * [SQLite](https://www.sqlitetutorial.net/sqlite-nodejs/)
 
 * [Sequelize](https://sequelize.org/)
+
+* https://github.com/sahat/hackathon-starter

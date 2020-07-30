@@ -44,19 +44,9 @@ exports.readAllQuotes = async function() {
 	return response;
 };
 
-exports.readQuote = function(id) {
-	let db = connect();
-	return new Promise(function(resolve, reject) {
-		const read_query = 'SELECT * FROM quote WHERE id=?';
-		db.all(read_query, [id], (err, row) => {
-			if (err) {
-				console.log(err.message);
-				reject(err);
-			}
-			resolve(row[0]);
-			disconnect(db);
-		});
-	});
+exports.readQuote = async function(id) {
+  const quote = await Quote.findByPk(id);
+	return quote;
 };
 
 exports.deleteQuote = function(id) {
