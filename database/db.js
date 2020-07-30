@@ -16,16 +16,6 @@ exports.connect = async function connect(){
 	}
 }
 
-// TODO: Tirar no final
-function disconnect(db) {
-	db.close((err) => {
-		if (err) {
-			console.error(err.message);
-		}
-		console.log('Closed database');
-	});
-}
-
 exports.setUpTable = async function() {
 	await sequelize.sync({ alter: true })
 };
@@ -49,16 +39,12 @@ exports.readQuote = async function(id) {
 	return quote;
 };
 
-exports.deleteQuote = function(id) {
-	let db = connect();
-	const delete_query = 'DELETE FROM quote WHERE id=?';
-	db.run(delete_query, id, function(err) {
-	  if (err) {
-	    return console.log(err.message);
-	  }
-	  console.log(`Row(s) deleted ${this.changes}`);
- });
- disconnect(db);
+exports.deleteQuote = async function(id) {
+  await Quote.destroy({
+    where: {
+      id: id
+    }
+  });
 };
 
 exports.updateQuote = async function(id,newquote) {

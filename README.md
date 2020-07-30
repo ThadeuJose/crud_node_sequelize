@@ -24,7 +24,7 @@ Create
 
 - [x] Update
 
-- [ ] Delete
+- [x] Delete
 
 - [ ] Fetch API
 
