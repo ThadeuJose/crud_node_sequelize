@@ -49,8 +49,8 @@ app.post('/quote', function (req, res) {
 
 app.put('/quote', function (req, res) {
   let id = req.body.id;
-  let quote = req.body.quote;
-  db.updateQuote(id,quote);
+  let body = req.body;
+  db.updateQuote(id,body);
   res.send('Ok');
 });
 

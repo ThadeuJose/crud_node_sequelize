@@ -61,14 +61,10 @@ exports.deleteQuote = function(id) {
  disconnect(db);
 };
 
-exports.updateQuote = function(id,newquote) {
-	let db = connect();
-	const update_query = 'UPDATE quote SET quote = ? WHERE id = ?';
-	db.run(update_query, [newquote,id], function(err) {
-	  if (err) {
-	    return console.log(err.message);
-	  }
-	  console.log(`Row(s) updated: ${this.changes}`);
-	});
-	disconnect(db);
+exports.updateQuote = async function(id,newquote) {
+  await Quote.update(newquote, {
+    where: {
+      id: id
+    }
+  });
 };

@@ -22,7 +22,7 @@ Create
 
 - [x] Read
 
-- [ ] Update
+- [x] Update
 
 - [ ] Delete
 

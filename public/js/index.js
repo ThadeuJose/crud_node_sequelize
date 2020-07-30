@@ -25,7 +25,7 @@ $(function () {
           let btnEdit = $('<button>').text('Edit').click(editQuote);
 
           $('<div>')
-              .text(i.quote)// TODO: Ajeitar 
+              .text(i.quote+' '+i.author+' '+i.place)// TODO: Ajeitar
               .attr('id',i.id)
               .append(btnDelete)
               .append(btnEdit)
@@ -55,6 +55,8 @@ $(function () {
     $.get('/quote/'+id, function(data) {
         console.log(data);
         $('#quoteEdit').val(data.quote);
+        $('#authorEdit').val(data.author);
+        $('#placeEdit').val(data.place);
         $('#idEdit').val(data.id);
         $('#main').removeClass();
         $('#edit').removeClass();
@@ -66,20 +68,23 @@ $(function () {
   $('#submitEdit').click(function () {
     let id = $('#idEdit').val();
     let quote = $('#quoteEdit').val();
-    $.ajax({
-        url: '/quote',
-        type: 'PUT',
-        data: { id:id, quote:quote },
-        success: function(data) {
-            console.log(data);
-            pollQuotes();
-            $('#main').removeClass();
-            $('#edit').removeClass();
-            $('#edit').addClass('hide');
-            $('#main').addClass('show');
-        }
-    });
-
+    let author = $('#authorEdit').val();
+    let place = $('#placeEdit').val();
+    if (quote) {
+      $.ajax({
+          url: '/quote',
+          type: 'PUT',
+          data: { id:id, quote:quote, author:author, place:place },
+          success: function(data) {
+              console.log(data);
+              pollQuotes();
+              $('#main').removeClass();
+              $('#edit').removeClass();
+              $('#edit').addClass('hide');
+              $('#main').addClass('show');
+          }
+      });
+    }
   });
 
 });
