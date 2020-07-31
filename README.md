@@ -10,13 +10,15 @@ O server atualiza a frase embaixo
 
 
 ## Next Step:
-Create
+Make the controller - https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes
 
 ## TODO
 
 - [x] Sequelize
 
-- [ ] Routes
+- [x] Routes
+
+- [ ] Controller
 
 - [x] Create
 
