@@ -18,7 +18,7 @@ Make the controller - https://developer.mozilla.org/en-US/docs/Learn/Server-side
 
 - [x] Routes
 
-- [ ] Controller
+- [x] Controller
 
 - [x] Create
 
@@ -62,6 +62,8 @@ https://github.com/axios/axios
 * [Automatic Test](https://dev.to/nedsoft/testing-nodejs-express-api-with-jest-and-supertest-1km6)
 
 * Teste na interface
+
+* Deixar mais parecido com o express generator
 
 ## Source
 
